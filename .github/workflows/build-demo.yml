@@ -6,6 +6,10 @@ on:
     branches:
       - main
 
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -19,4 +23,10 @@ jobs:
       - name: Execute gradlew build
         working-directory: ./demo
         run: ./gradlew clean build
-
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.11.0
+        with:
+          files: |
+            ./demo/build/test-results/**/*.xml
+            ./demo/build/test-results/**/*.trx
+            ./demo/build/test-results/**/*.json
