@@ -30,3 +30,9 @@ jobs:
             ./demo/build/test-results/**/*.xml
             ./demo/build/test-results/**/*.trx
             ./demo/build/test-results/**/*.json
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package Demo
+          path: |
+            ./demo/build/libs/*.jar
+            !./demo/build/libs/*-plain.jar
